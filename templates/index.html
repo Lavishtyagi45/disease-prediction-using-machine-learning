@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disease Prediction using Machine Learning</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+<header class="header">
+    <div class="container">
+        <nav class="navbar">
+            <div class="logo">
+                <img src="../static/logo.jpeg" alt="Logo">
+            </div>
+            <ul class="nav-links">
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#dataset">Dataset</a></li>
+                <li><a href="#classifiers">Classifiers</a></li>
+                <li><a href="#results">Results</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="container">
+        <h1 class="hero-title">Disease Prediction using Machine Learning</h1>
+        <p class="hero-description">Predicting diseases with high accuracy using machine learning classifiers</p>
+        <a href="#getyourprediction" class="cta-button">Get Started</a>
+    </div>
+</section>
+
+<section class="overview" id="introduction">
+    <div class="container">
+        <h2 class="section-title">Overview</h2>
+        <p>This repository contains a minor project for disease prediction using machine learning classifiers such as logistic regression, decision tree, random forest, and MLP (Multi-layer Perceptron). The project focuses on evaluating the performance of these classifiers based on accuracy, confusion matrices, and classification reports.</p>
+    </div>
+</section>
+
+<section class="dataset" id="dataset">
+    <div class="container">
+        <h2 class="section-title">Dataset</h2>
+        <p>The dataset used in this project is provided here.</p>
+        <ul>
+            <li><a href="training_data.csv">training_data.csv</a></li>
+            <li><a href="testing.csv">testing.csv</a></li>
+        </ul>
+        <p>You can replace it with your own dataset. Ensure that the dataset is in the CSV format.</p>
+    </div>
+</section>
+
+<section class="classifiers" id="classifiers">
+    <div class="container">
+        <h2 class="section-title">Classifiers</h2>
+        <p>The following classifiers are implemented in this project:</p>
+        <ul>
+            <li>Logistic Regression</li>
+            <li>Decision Tree</li>
+            <li>Random Forest</li>
+            <li>MLP (Multi-layer Perceptron)</li>
+        </ul>
+    </div>
+</section>
+
+<section class="results" id="results">
+    <div class="container">
+        <h2 class="section-title">Results</h2>
+        <p>After running the main script, the results are generated. These include:</p>
+        <ul>
+            <li>Accuracy of each classifier</li>
+            <li>Confusion matrices</li>
+            <li>Classification reports</li>
+        </ul>
+    </div>
+</section>
+
+<section class="prediction-form" id="getyourprediction">
+    <div class="container">
+        <h2 class="section-title">Get Your Prediction</h2>
+        <form id="predictionForm" action="/result" method="post">
+            <div class="form-group">
+                <label for="name">Name: <input type="text" id="name" name="name" placeholder="Enter your name" required></label><br/>
+                <label for="age">Age: <input type="number" id="age" name="age" placeholder="Enter your age" required></label><br/>
+                <label>Gender:</label><br/>
+                <label for="male"><input type="radio" id="male" name="gender" value="male" required>Male</label>
+                <label for="female"><input type="radio" id="female" name="gender" value="female" required>Female</label><br/>
+                <h2>Select Symptoms</h2>
+                    {% for symptom in symptoms %}
+                    <label><input type="checkbox" name="{{ symptom }}" value="1">{{ symptom }}</label><br>
+                    {% endfor %}
+                    <br>
+            </div>
+            <button type="submit" class="submit-button">Get Prediction</button>
+        </form>
+    </div>
+</section>
+
+<section class="testimonials">
+    <div class="container">
+        <h2 class="section-title">Testimonials</h2>
+        <div class="testimonial">
+            <img src="user1.png" alt="User Photo">
+            <p class="name">A</p>
+            <p class="message">"Testimonial message from user"</p>
+        </div>
+
+        <div class="testimonial">
+            <img src="user2.png" alt="User Photo">
+            <p class="name">B</p>
+            <p class="message">"Testimonial message from user"</p>
+        </div>
+    </div>
+</section>
+
+<section class="statistics">
+    <div class="container">
+        <h2 class="section-title">Statistics</h2>
+        <div class="statistic">
+            <h3 class="statistic-title">Statistic 1</h3>
+            <p class="statistic-description">Number of predictions made</p>
+        </div>
+        <div class="statistic">
+            <h3 class="statistic-title">Statistic 2</h3>
+            <p class="statistic-description">Number of predictions made</p>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <nav class="footer-nav">
+            <ul class="footer-links">
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Use</a></li>
+            </ul>
+        </nav>
+    </div>
+</footer>
+
+<script>
+    fetch('/symptoms')
+        .then(response => response.json())
+        .then(symptoms => {
+            const symptomsList = document.getElementById('symptomsList');
+            symptoms.forEach(symptom => {
+                const li = document.createElement('li');
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.name = symptom;
+                checkbox.value = '0'; 
+
+                checkbox.addEventListener('change', function() {
+                    this.value = this.checked ? '1' : '0';
+                });
+
+                const label = document.createElement('label');
+                label.textContent = symptom;
+
+                li.appendChild(checkbox);
+                li.appendChild(label);
+
+                symptomsList.appendChild(li);
+            });
+        })
+        .catch(error => console.error('Error fetching symptoms:', error));
+</script>
+
+</body>
+</html>

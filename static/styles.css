@@ -1,0 +1,161 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+}
+
+.header {
+    background-color: #4CAF50;
+    padding: 20px 0;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-links li {
+    display: inline;
+    margin-left: 20px;
+}
+
+.nav-links li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.hero {
+    background-color: #f2f2f2;
+    padding: 100px 0;
+    text-align: center;
+}
+
+.hero-title {
+    margin: 0;
+    font-size: 36px;
+    color: #333;
+}
+
+.hero-description {
+    color: #777;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.overview {
+    background-color: #fff;
+    padding: 80px 0;
+    text-align: center;
+}
+
+.dataset {
+    background-color: #f2f2f2;
+    padding: 80px 0;
+    text-align: center;
+}
+
+.classifiers {
+    background-color: #fff;
+    padding: 80px 0;
+    text-align: center;
+}
+
+.results {
+    background-color: #f2f2f2;
+    padding: 80px 0;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.section-description {
+    color: #555;
+}
+
+.prediction-form {
+    background-color: #fff;
+    padding: 80px 0;
+    text-align: center;
+}
+
+.symptoms-list {
+    list-style: none;
+    padding: 0;
+}
+
+.symptoms-list li {
+    margin-bottom: 10px;
+}
+
+.submit-button {
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.testimonials {
+    background-color: #f2f2f2;
+    padding: 80px 0;
+    text-align: center;
+}
+
+.testimonial {
+    margin-bottom: 40px;
+}
+
+.statistics {
+    background-color: #fff;
+    padding: 80px 0;
+    text-align: center;
+}
+
+.statistic {
+    margin-bottom: 40px;
+}
+
+.footer {
+    background-color: #4CAF50;
+    padding: 20px 0;
+    color: #fff;
+    text-align: center;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    display: inline;
+    margin-left: 20px;
+}
+
+.footer-links li a {
+    color: #fff;
+    text-decoration: none;
+}

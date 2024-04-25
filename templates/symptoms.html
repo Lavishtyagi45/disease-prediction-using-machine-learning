@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symptoms</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Select Symptoms</h2>
+        <form action="/result" method="post">
+            {% for symptom in symptoms %}
+            <input type="checkbox" name="{{ symptom }}" value="1">{{ symptom }}<br>
+            {% endfor %}
+            <br>
+            <input type="submit" value="Predict">
+        </form>
+    </div>
+</body>
+</html>
