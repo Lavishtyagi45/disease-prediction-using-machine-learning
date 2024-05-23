@@ -1,204 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Result</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Diagnosis Results</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            background-color: #f4f4f9;
+            color: #333;
         }
-
         .container {
-            width: 90%;
+            width: 80%;
             margin: auto;
+            overflow: hidden;
+            padding: 20px;
         }
-
-        .header {
-            background-color: #4CAF50;
-            padding: 20px 0;
+        h1, h2, h3 {
+            color: #444;
         }
-
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo img {
-            width: 150px;
-        }
-
-        .nav-links {
-            list-style-type: none;
-            display: flex;
-        }
-
-        .nav-links li {
-            margin-right: 20px;
-        }
-
-        .nav-links li a {
-            text-decoration: none;
-            color: #fff;
-        }
-
-        .section-title {
-            margin-top: 50px;
-            margin-bottom: 20px;
-            color: #4CAF50;
-        }
-
-        .model {
-            margin-bottom: 50px;
-        }
-
-        .model-title {
-            color: #4CAF50;
-            margin-bottom: 5px;
-        }
-
-        .model-accuracy {
-            margin-top: 0;
-        }
-
-        .model-metrics-title {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .model-metrics-content {
-            white-space: pre-line;
-        }
-
-        .footer {
-            background-color: #4CAF50;
-            padding: 20px 0;
-            margin-top: 50px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-
-        .footer-nav {
-            text-align: center;
-        }
-
-        .footer-links {
+        ul {
             list-style-type: none;
             padding: 0;
-            margin: 0;
         }
-
-        .footer-links li {
-            display: inline;
-            margin-right: 10px;
+        ul li {
+            background: #e2e2e2;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
         }
-
-        .footer-links li a {
-            text-decoration: none;
-            color: #fff;
+        .model-results {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-
-        @media only screen and (max-width: 768px) {
-            .container {
-                width: 100%;
-            }
-
-            .nav-links {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .nav-links li {
-                margin-bottom: 10px;
-            }
+        .model-results h3 {
+            margin-top: 0;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .accuracy, .conf-matrix, .class-report {
+            margin-bottom: 10px;
+        }
+        .conf-matrix, .class-report {
+            display: block;
+            background: #f8f8f8;
+            padding: 10px;
+            border-radius: 5px;
         }
     </style>
 </head>
-
 <body>
-
-<header class="header">
     <div class="container">
-        <nav class="navbar">
-            <div class="logo">
-                <img src="logo.jpeg" alt="Logo">
-            </div>
-            <ul class="nav-links">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </nav>
-    </div>
-</header>
-
-<section class="prediction-results">
-    <div class="container">
-        <h2 class="section-title">Prediction Results</h2>
-        <div class="model">
-            <h3 class="model-title">Logistic Regression</h3>
-            <p class="model-accuracy">Accuracy: {{ accuracy_model }}</p>
-            <div class="model-metrics">
-                <p class="model-metrics-title">Confusion Matrix:</p>
-                <p class="model-metrics-content">{{ conf_matrix_model | safe }}</p>
-                <p class="model-metrics-title">Classification Report:</p>
-                <p class="model-metrics-content">{{ classification_report_model | safe }}</p>
-            </div>
-        </div>
-        <div class="model">
-            <h3 class="model-title">Decision Tree Classifier</h3>
-            <p class="model-accuracy">Accuracy: {{ accuracy_clf }}</p>
-            <div class="model-metrics">
-                <p class="model-metrics-title">Confusion Matrix:</p>
-                <p class="model-metrics-content">{{ conf_matrix_clf | safe }}</p>
-                <p class="model-metrics-title">Classification Report:</p>
-                <p class="model-metrics-content">{{ classification_report_clf | safe }}</p>
-            </div>
-        </div>
-        <div class="model">
-            <h3 class="model-title">Random Forest Classifier</h3>
-            <p class="model-accuracy">Accuracy: {{ accuracy_random_forest }}</p>
-            <div class="model-metrics">
-                <p class="model-metrics-title">Confusion Matrix:</p>
-                <p class="model-metrics-content">{{ conf_matrix_random_forest | safe }}</p>
-                <p class="model-metrics-title">Classification Report:</p>
-                <p class="model-metrics-content">{{ class_report_random_forest | safe }}</p>
-            </div>
-        </div>
-        <div class="model">
-            <h3 class="model-title">Neural Network (Multi-layer Perceptron)</h3>
-            <p class="model-accuracy">Accuracy: {{ accuracy_mlp }}</p>
-            <div class="model-metrics">
-                <p class="model-metrics-title">Confusion Matrix:</p>
-                <p class="model-metrics-content">{{ conf_matrix_mlp | safe }}</p>
-                <p class="model-metrics-title">Classification Report:</p>
-                <p class="model-metrics-content">{{ class_report_mlp | safe }}</p>
-            </div>
-        </div>
+        <h1>Diagnosis Results</h1>
+        <h2>Most Predicted Disease: {{ most_predict_disease }}</h2>
         
-        <h2>Most Predicted Disease</h2>
-        <p>{{ most_predict_disease }}</p>
-    </div>
-</section>
+        <h3>Selected Symptoms:</h3>
+        <ul>
+            {% for symptom in selected_symptoms %}
+            <li>{{ symptom }}</li>
+            {% endfor %}
+        </ul>
 
-<footer class="footer">
-    <div class="container">
-        <nav class="footer-nav">
-            <ul class="footer-links">
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Terms of Use</a></li>
-            </ul>
-        </nav>
+        {% for model_name, result in results.items() %}
+            <div class="model-results">
+                <h3>{{ model_name }}</h3>
+                <div class="accuracy">
+                    <strong>Accuracy:</strong> {{ result.accuracy }}
+                </div>
+                <div class="conf-matrix">
+                    <h4>Confusion Matrix:</h4>
+                    <pre>{{ result.conf_matrix }}</pre>
+                </div>
+                <div class="class-report">
+                    <h4>Classification Report:</h4>
+                    <pre>{{ result.class_report }}</pre>
+                </div>
+            </div>
+        {% endfor %}
     </div>
-</footer>
-
 </body>
-
 </html>
